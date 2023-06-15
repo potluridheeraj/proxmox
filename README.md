@@ -1,8 +1,21 @@
-# proxmox
-This is a repo where I create proxmox homer server details 
+** proxmox **
+This is how I created proxmox homer server from scratch 
 
+# Install libguestfs-tools on proxmox server which is used to inject required packages and commands to the serer
+```
+sudo apt update -y
+sudo apt install libguestfs-tools -y
+```
 
+# Clone required Ubuntu VM [Ubuntu images](https://cloud-images.ubuntu.com/)
+```
+wget https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.img
+```
+
+# Clone required Ubuntu VM
+```
 virt-customize -a jammy-server-cloudimg-amd64.img --install qemu-guest-agent
+```
 
 virt-customize -a jammy-server-cloudimg-amd64.img --run-command "sudo truncate -s 0 /etc/machine-id /var/lib/dbus/machine-id"
 
@@ -21,5 +34,3 @@ qm set 6400 --boot c --bootdisk scsi0
 qm set 6400 --serial0 socket --vga serial0
 
 qm set 6400 --agent 1,fstrim_cloned_disks=1
-
-
